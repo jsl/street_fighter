@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-module Failable
+module StreetFighter
   describe "#follows" do
     it "returns the first Left after a sequence of Right values" do
       Left.new("first").follows(Right.new("second")).
@@ -74,6 +74,15 @@ module Failable
 
         proc { Right.new(bob).failable(Proc.new{ Object.new }) }.
           must_raise ArgumentError
+      end
+
+      it "passes any mutations to the object to subsequent functions" do
+        young_bob = Person.new("Bob", 15)
+
+        add_to_age  = Proc.new{|p| p.age += 1 ; Right.new(p) }
+
+        res = Right.new(young_bob).failable(add_to_age)
+        res.value.age.must_equal 16
       end
     end
   end

@@ -1,4 +1,4 @@
-module Failable
+module StreetFighter
   class Either
     attr_reader :left, :right
 

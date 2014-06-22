@@ -1,4 +1,4 @@
-module Failable
+module StreetFighter
   class Left < EitherValue
     def follows other # >> (then)
       EitherCheck.new(other).run!

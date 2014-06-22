@@ -1,4 +1,4 @@
-module Failable
+module StreetFighter
   class EitherValue
     attr_reader :value
 

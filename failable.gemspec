@@ -1,16 +1,16 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'failable/version'
+require 'street_fighter/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "failable"
-  spec.version       = Failable::VERSION
+  spec.name          = "street_fighter"
+  spec.version       = StreetFighter::VERSION
   spec.authors       = ["Justin Leitgeb"]
-  spec.email         = ["justin@stackbuilders.com"]
+  spec.email         = ["support@stackbuilders.com"]
   spec.summary       = %q{An implementation of an Either monad in Ruby}
   spec.description   = %q{Implements an Either monad in Ruby for cleaner error handling.}
-  spec.homepage      = "http://github.com/stackbuilders/failable"
+  spec.homepage      = "http://github.com/stackbuilders/street_fighter"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
