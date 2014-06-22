@@ -28,14 +28,16 @@ describe "binding and mapping over failable tests" do
   describe "#bind" do
     it "returns the Right value if the function is successful" do
       bob = Person.new("Bob", 22)
+      valid_age  = method(:old_enough?)
 
-      bob?(bob).bind(method(:old_enough?)).must_equal(Right.new(bob))
+      bob?(bob).bind(valid_age).must_equal(Right.new(bob))
     end
 
     it "returns the first Left value encountered in a sequence" do
       bob = Person.new("Tom", 22)
+      valid_age  = method(:old_enough?)
 
-      bob?(bob).bind(method(:old_enough?)).
+      bob?(bob).bind(valid_age).
         must_equal(Left.new("The name should have been Bob!"))
     end
   end
