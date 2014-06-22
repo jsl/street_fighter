@@ -13,14 +13,16 @@ end
 describe "binding and mapping over failable tests" do
   Person = Struct.new(:name, :age)
 
+  def failable_test person, bool, msg
+    bool ? Right.new(person) : Left.new(msg)
+  end
+
   def bob?(person)
-    person.name == 'Bob' ? Right.new(person) :
-                           Left.new("The name should have been Bob!")
+    failable_test person, person.name == 'Bob', 'The name should have been Bob!'
   end
 
   def old_enough?(person)
-    person.age >= 21 ? Right.new(person) :
-                       Left.new("Person is not old enough!")
+    failable_test person, person.age >= 21, 'Person is not old enough!'
   end
 
   describe "#bind" do
