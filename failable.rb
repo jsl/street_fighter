@@ -111,7 +111,7 @@ class Right < EitherValue
   def failable *fns
     return self if fns.empty?
 
-    fns.first.call(self.value).tap do |result|
+    bind(fns.first).tap do |result|
       EitherCheck.new(result).run!
     end.failable(*fns[1..-1])
   end
