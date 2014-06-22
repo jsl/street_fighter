@@ -45,7 +45,7 @@ describe "binding and mapping over failable tests" do
       valid_age  = method(:old_enough?)
       valid_name = method(:bob?)
 
-      bob.failable(valid_age, valid_name).must_equal Right.new(bob)
+      Right.new(bob).failable(valid_age, valid_name).must_equal Right.new(bob)
     end
 
     it "returns the first Left value if a computation fails in the sequence" do
@@ -54,34 +54,19 @@ describe "binding and mapping over failable tests" do
       valid_age  = method(:old_enough?)
       valid_name = method(:bob?)
 
-      young_bob.failable(valid_age, valid_name).must_equal Left.new("Person is not old enough!")
+      Right.new(young_bob).failable(valid_age, valid_name).must_equal Left.new("Person is not old enough!")
     end
 
     it "raises an ArgumentError if the function doesn't return an EitherValue" do
       bob = Person.new("Bob", 22)
 
-      proc { bob.failable(Proc.new{ Object.new }) }.must_raise ArgumentError
-    end
-  end
-end
-
-class Object
-  def failable *fns
-    fns.inject(Right.new(self)) do |result, fn|
-      case result
-      when Left
-        break result
-
-      when Right
-        fn.call(self).tap { |r| EitherCheck.new(r).run! }
-
-      end
+      proc { Right.new(bob).failable(Proc.new{ Object.new }) }.must_raise ArgumentError
     end
   end
 end
 
 class EitherCheck < Struct.new(:klass)
-  def run! ; raise ArgumentError unless r.is_a?(EitherValue) ; end
+  def run! ; raise ArgumentError unless klass.is_a?(EitherValue) ; end
 end
 
 class Either
@@ -108,6 +93,10 @@ class EitherValue
     raise NotImplementedError, "Bind not implemented here."
   end
 
+  def failable # `fmap` in Haskell, but restricted to EitherValues
+    raise NotImplementedError, "Bind not implemented here."
+  end
+
   def ==(other)
     self.value == other.value
   end
@@ -119,6 +108,14 @@ class Right < EitherValue
     other
   end
 
+  def failable *fns
+    return self if fns.empty?
+
+    fns.first.call(self.value).tap do |result|
+      EitherCheck.new(result).run!
+    end.failable(*fns[1..-1])
+  end
+
   def bind func
     func.call(value)
   end
@@ -127,6 +124,10 @@ end
 class Left < EitherValue
   def follows other # >> (then)
     EitherCheck.new(other).run!
+    self
+  end
+
+  def failable *fns
     self
   end
 
