@@ -74,6 +74,8 @@ fight = method(:battle).to_proc.curry
 I hope you're ready - the fight is about to begin!
 
 ```ruby
+# Note that we have to wrap our fighter in a *Right* value to indicate
+# that he's the hero before he engages in his series of fights.
 winner = StreetFighter::Right.new(hero).
            failable( fight[retsu], fight[geki], fight[joe] )
 

@@ -1,8 +1,6 @@
 require 'spec_helper'
 
-# This serves as a simple "generative test" of the
 describe "playing a game of street fighter" do
-  include StreetFighter
 
   # Perform a random battle, giving the hero 3 chances to win to every
   # 1 chance for the opponent. We must return the winner wrapped in a Left
@@ -24,6 +22,8 @@ describe "playing a game of street fighter" do
 
     fight = method(:battle).to_proc.curry
 
+    # Note that we have to wrap our fighter in a *Right* value to indicate
+    # that he's the hero before he engages in his series of fights.
     winner = StreetFighter::Right.new(hero).
                failable( fight[retsu], fight[geki], fight[joe] )
 
