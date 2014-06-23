@@ -4,7 +4,7 @@ This library helps to avoid the code smell of "cascading conditionals" (otherwis
 
 ![The StreetFighter anti-pattern as seen in PHP](images/streetfighter.jpg)
 
-_From [Paul Dragoonis](https://twitter.com/dr4goonis/status/476617165463105536)_
+_Image from [Paul Dragoonis](https://twitter.com/dr4goonis/status/476617165463105536)._
 
 ## Example
 
@@ -14,7 +14,7 @@ In the game Street Fighter, the hero, Ryu, must defeat 10 opponents. We'll just 
 * Geki (Japan), who throws ninja stars and is able to teleport
 * Joe (USA), who can do a power kick and low kick
 
-_From [Strategy Wiki](http://strategywiki.org/wiki/Street_Fighter/Opponents)_
+_Player info from [Strategy Wiki](http://strategywiki.org/wiki/Street_Fighter/Opponents)._
 
 Let's say that Ryu must fight the three opponents above in sequence. He continues battling until he is defeated or he defeats all three opponents. As the game programmer, you must either return a structure representing Ryu, unscathed at the end of the fights, or you must return the opponent who defeated Ryu.
 
