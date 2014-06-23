@@ -66,8 +66,7 @@ end
 ```
 
 Finally we define the rounds of the game. We're going to use [currying](http://en.wikipedia.org/wiki/Currying) here
-so that we can apply an opponent to each battle, and wind up with a partially-
-applied function. Essentially, each partially-applied function can be thought of as an opponent angrily waiting until he has the opportunity to try to do serious damage to our hero, Ryu.
+so that we can apply an opponent to each battle, and wind up with a partially-applied function. Essentially, each partially-applied function can be thought of as an opponent angrily waiting until he has the opportunity to try to do serious damage to our hero, Ryu.
 
 ```ruby
 fight = method(:battle).to_proc.curry
