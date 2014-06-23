@@ -39,7 +39,7 @@ end
 It's hard to read, let alone verify that this logic is consistent with the game requirements. Let's try it using the StreetFighter gem. First, we'll create a structure to represent the players. For now, a simple Struct with a name and a boolean representing whether they're the hero or opponent will suffice:
 
 ```ruby
-Player = Struct.new(:name, :hero)
+Player = Struct.new(:name, true)
 ```
 
 Let's define the hero and three opponents:
