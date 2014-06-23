@@ -1,14 +1,14 @@
 require 'spec_helper'
 
 module StreetFighter
-  describe "#follows" do
+  describe "#match" do
     it "returns the first Left after a sequence of Right values" do
-      Left.new("first").follows(Right.new("second")).
+      Left.new("first").match(Right.new("second")).
         must_equal Left.new("first")
     end
 
     it "returns a Right if all values in the sequence are Right" do
-      Right.new("first").follows(Right.new("second")).
+      Right.new("first").match(Right.new("second")).
         must_equal Right.new("second")
     end
   end

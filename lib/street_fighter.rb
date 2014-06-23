@@ -7,7 +7,7 @@ require 'street_fighter/either'
 require 'street_fighter/either_check'
 
 module StreetFighter
-  def self.play(hero, *opponents)
-    Right.new(hero).play(*opponents)
+  def self.tournament(hero, *opponents)
+    Right.new(hero).tournament(*opponents)
   end
 end

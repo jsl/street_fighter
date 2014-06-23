@@ -6,7 +6,7 @@ module StreetFighter
       @value = value
     end
 
-    def follows # (>>) in Haskell
+    def match # (>>) in Haskell
       raise NotImplementedError, "Follows not implemented here."
     end
 

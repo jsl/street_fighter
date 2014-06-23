@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "playing a game of street fighter" do
+describe "tournamenting a game of street fighter" do
 
   Player = Struct.new(:name, :hero)
 
@@ -24,7 +24,7 @@ describe "playing a game of street fighter" do
 
     fight = method(:battle).to_proc.curry
 
-    winner = StreetFighter.play(ryu, fight[retsu], fight[geki], fight[joe])
+    winner = StreetFighter.tournament(ryu, fight[retsu], fight[geki], fight[joe])
 
     # case winner
     # when StreetFighter::Left

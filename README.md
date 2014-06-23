@@ -38,7 +38,7 @@ def fight
 end
 ```
 
-It's hard to read, let alone verify that this logic is consistent with the game requirements. Let's try it using the StreetFighter gem. First, we'll create a structure to represent the players. For now, a simple Struct with a name and a boolean representing whether they're the hero or opponent will suffice:
+It's hard to read, let alone verify that this logic is consistent with the game requirements. Let's try it using the StreetFighter gem. First, we'll create a structure to represent the tournamenters. For now, a simple Struct with a name and a boolean representing whether they're the hero or opponent will suffice:
 
 ```ruby
 Player = Struct.new(:name, :hero)
@@ -79,7 +79,7 @@ fight = method(:battle).to_proc.curry
 I hope you're ready - the fight is about to begin!
 
 ```ruby
-winner = StreetFighter.play(ryu, fight[retsu], fight[geki], fight[joe])
+winner = StreetFighter.tournament(ryu, fight[retsu], fight[geki], fight[joe])
 ```
 
 All that's left is to see the results. Having the result of the computation wrapped in an `EitherValue` (`Right` or `Left`) facilitates using a simple case statement on the return value:
@@ -97,7 +97,7 @@ Fortunately, the output is:
 
     Ryu has defeated his opponents!
 
-Not only has Ryu won this round, but we've completely defeated the cascading conditionals by applying some easy-to-use functional patterns. If you'd like to play around with the game and see if Ryu keeps up his winning streak, [it's a part of the test suite for this library](spec/street_fighter/street_fighter_game_spec.rb).
+Not only has Ryu won this round, but we've completely defeated the cascading conditionals by applying some easy-to-use functional patterns. If you'd like to tournament around with the game and see if Ryu keeps up his winning streak, [it's a part of the test suite for this library](spec/street_fighter/street_fighter_game_spec.rb).
 
 ## Credits
 

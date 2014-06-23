@@ -1,11 +1,11 @@
 module StreetFighter
   class Left < EitherValue
-    def follows other # >> (then)
+    def match other # >> (then)
       EitherCheck.new(other).run!
       self
     end
 
-    def play *fns
+    def tournament *fns
       self
     end
 
