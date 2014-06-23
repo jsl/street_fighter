@@ -5,12 +5,12 @@ module StreetFighter
       other
     end
 
-    def failable *fns
+    def play *fns
       return self if fns.empty?
 
       bind(fns.first).tap do |result|
         EitherCheck.new(result).run!
-      end.failable(*fns[1..-1])
+      end.play(*fns[1..-1])
     end
 
     def bind func

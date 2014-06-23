@@ -2,6 +2,8 @@ require 'spec_helper'
 
 describe "playing a game of street fighter" do
 
+  Player = Struct.new(:name, :hero)
+
   # Perform a random battle, giving the hero 3 chances to win to every
   # 1 chance for the opponent. We must return the winner wrapped in a `Left`
   # if the winner is the opponent, or a `Right` if the winner is our hero.
@@ -11,21 +13,18 @@ describe "playing a game of street fighter" do
                   StreetFighter::Left.new(winner)
   end
 
-  Player = Struct.new(:name, :hero)
 
   it "always returns a Left or a Right value" do
-    hero = Player.new(:ryu, true)
+    ryu   = Player.new(:ryu, true)    # The hero!
 
+    # The bad guys.
     retsu = Player.new(:retsu, false)
     geki  = Player.new(:geki,  false)
     joe   = Player.new(:joe,   false)
 
     fight = method(:battle).to_proc.curry
 
-    # Note that we have to wrap our fighter in a *Right* value to indicate
-    # that he's the hero before he engages in his series of fights.
-    winner = StreetFighter::Right.new(hero).
-               failable( fight[retsu], fight[geki], fight[joe] )
+    winner = StreetFighter.play(ryu, fight[retsu], fight[geki], fight[joe])
 
     # case winner
     # when StreetFighter::Left

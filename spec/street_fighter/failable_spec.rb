@@ -49,42 +49,6 @@ module StreetFighter
       end
     end
 
-    describe "#failable" do
-      it "returns the final Right value if sequence only results in Rights" do
-        bob = Person.new("Bob", 22)
-
-        valid_age  = method(:old_enough?)
-        valid_name = method(:bob?)
-
-        Right.new(bob).failable(valid_age, valid_name).must_equal Right.new(bob)
-      end
-
-      it "returns the first Left value if a computation fails in the sequence" do
-        young_bob = Person.new("Bob", 15)
-
-        valid_age  = method(:old_enough?)
-        valid_name = method(:bob?)
-
-        Right.new(young_bob).failable(valid_age, valid_name).
-          must_equal Left.new("Person is not old enough!")
-      end
-
-      it "raises an ArgumentError if the function doesn't return an EitherValue" do
-        bob = Person.new("Bob", 22)
-
-        proc { Right.new(bob).failable(Proc.new{ Object.new }) }.
-          must_raise ArgumentError
-      end
-
-      it "passes any mutations to the object to subsequent functions" do
-        young_bob = Person.new("Bob", 15)
-
-        add_to_age  = Proc.new{|p| p.age += 1 ; Right.new(p) }
-
-        res = Right.new(young_bob).failable(add_to_age)
-        res.value.age.must_equal 16
-      end
-    end
   end
 
 end

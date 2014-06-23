@@ -41,15 +41,19 @@ end
 It's hard to read, let alone verify that this logic is consistent with the game requirements. Let's try it using the StreetFighter gem. First, we'll create a structure to represent the players. For now, a simple Struct with a name and a boolean representing whether they're the hero or opponent will suffice:
 
 ```ruby
-Player = Struct.new(:name, true)
+Player = Struct.new(:name, :hero)
 ```
 
 Let's define the hero and three opponents:
 
 ```ruby
+ryu   = Player.new(:ryu, true)    # The hero!
+
+# The bad guys.
 retsu = Player.new(:retsu, false)
 geki  = Player.new(:geki,  false)
 joe   = Player.new(:joe,   false)
+
 ```
 
 And the fighting function:
@@ -75,11 +79,12 @@ fight = method(:battle).to_proc.curry
 I hope you're ready - the fight is about to begin!
 
 ```ruby
-# Note that we have to wrap our fighter in a *Right* value to indicate
-# that he's the hero before he engages in his series of fights.
-winner = StreetFighter::Right.new(hero).
-           failable( fight[retsu], fight[geki], fight[joe] )
+winner = StreetFighter.play(ryu, fight[retsu], fight[geki], fight[joe])
+```
 
+All that's left is to see the results. Having the result of the computation wrapped in an `EitherValue` (`Right` or `Left`) facilitates using a simple case statement on the return value:
+
+```ruby
 case winner
 when StreetFighter::Left
   puts "Our hero has been defeated, and #{winner.value.name} is the new champion."

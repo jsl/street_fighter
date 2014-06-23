@@ -5,7 +5,7 @@ module StreetFighter
       self
     end
 
-    def failable *fns
+    def play *fns
       self
     end
 
