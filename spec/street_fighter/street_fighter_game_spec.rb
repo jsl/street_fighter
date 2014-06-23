@@ -3,8 +3,8 @@ require 'spec_helper'
 describe "playing a game of street fighter" do
 
   # Perform a random battle, giving the hero 3 chances to win to every
-  # 1 chance for the opponent. We must return the winner wrapped in a Left
-  # if the winner is the opponent, or a Right if the winner is our hero.
+  # 1 chance for the opponent. We must return the winner wrapped in a `Left`
+  # if the winner is the opponent, or a `Right` if the winner is our hero.
   def battle(opponent, hero)
     winner = ([hero] * 3 << opponent).sample
     winner.hero ? StreetFighter::Right.new(winner) :
