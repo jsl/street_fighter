@@ -96,4 +96,4 @@ Not only has Ryu won this round, but we've completely defeated the cascading con
 ## Credits
 
 Thanks to [Paul Dragoonis](https://twitter.com/dr4goonis) for [identifying
-this anti-pattern and giving us a great graphical illusttration of the beast in the wild](https://twitter.com/dr4goonis/status/476617165463105536).
+this anti-pattern and giving us a great graphical illustration of the beast in the wild](https://twitter.com/dr4goonis/status/476617165463105536).
