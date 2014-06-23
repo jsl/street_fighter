@@ -71,7 +71,7 @@ applied function. Essentially, each partially-applied function can be thought of
 fight = method(:battle).to_proc.curry
 ```
 
-I hope you're ready, the fight is about to begin!
+I hope you're ready - the fight is about to begin!
 
 ```ruby
 winner = StreetFighter::Right.new(hero).
